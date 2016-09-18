@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<canvas id="canvas" width="8", height="1"></canvas>
+	<script type="text/javascript">
+		$.post('http://xx.xx.xx.xx:80/upload', { imgData: canvas.toDataURL() }, (data) => {
+		    if (data === 'OK') {
+		        let img = new Image()
+		        img.crossOrigin = "anonymous"
+		        img.src = 'http://xx.xx.xx.xx:80/out.png'
+		        img.onload = () => {
+		            console.log('完成图片请求与缓存')
+		            ctx.drawImage(img, 0, 0)
+		            console.log(ctx.getImageData(0, 0, 8, 1).data)
+		        }
+		    }
+		})
+	</script>
+</body>
+</html>
